@@ -1,3 +1,5 @@
+## Example 6.4(p.123)
+
 import itertools
 import math
 from matplotlib import pyplot as plt
