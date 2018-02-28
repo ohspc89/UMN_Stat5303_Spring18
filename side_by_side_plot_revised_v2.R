@@ -112,7 +112,7 @@ side_by_side <- function(model, boxplot_threshold = 20, exclude_term = NULL)
                  panel.grid.major = element_blank(),
                  panel.grid.minor = element_blank())
   
-  p + scale_y_continuous('Effects or residuals', breaks = seq(-2, 2, 0.5))
+  p + scale_y_continuous('Effects or residuals')
 }
 
 # sample execution
