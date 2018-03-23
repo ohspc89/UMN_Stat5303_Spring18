@@ -93,7 +93,7 @@ side_by_side <- function(model, boxplot_threshold = 20, exclude_term = NULL)
   df1$.id <- factor(df1$.id, levels=factor_labels)
   
   # adjust it to apply ggplot
-  df1_long <- na.omit(melt(df1, id.var = '.id'))
+  df1_long <- na.omit(reshape2::melt(df1, id.var = '.id'))
   
   # choose which term(s) to make boxplots
   boxplot_terms <- df1_long[df1_long$variable == boxplot_threshold, 1]
@@ -112,8 +112,18 @@ side_by_side <- function(model, boxplot_threshold = 20, exclude_term = NULL)
                  panel.grid.major = element_blank(),
                  panel.grid.minor = element_blank())
   
-  p + scale_y_continuous('Effects or residuals', breaks = seq(-2, 2, 0.5))
+    p + scale_y_continuous('Effects or residuals')
 }
 
 # sample execution
 side_by_side(model=out_pf2_log, boxplot_threshold=19, exclude_term=c('alg'))
+
+sample_dt <- read.table('/home/jinseok/users.stat.umn.edu/~corbett/classes/5303/RDataFiles/exmpl8.10', header=T)
+
+sample_dt$atemp <- as.factor(sample_dt$atemp)
+sample_dt$gtemp <- as.factor(sample_dt$gtemp)
+sample_dt$variety <- as.factor(sample_dt$variety)
+
+fit1 <- lm(log(y)~atemp*gtemp*variety, sample_dt)
+
+side_by_side(fit1, boxplot_threshold = 15)
