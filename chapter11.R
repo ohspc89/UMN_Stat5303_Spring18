@@ -46,7 +46,7 @@ approx_f <- function(target_effect, data.frame){
       index <- c()
       for(i in 1:N){
         if(target_effect %in% strsplit(terms[i], split='[.]')[[1]]){
-          if(num_of_terms[i] == (length_of_target+1)){
+          if(term_lengths(terms)[i] == (length_of_target+1)){
             index <- c(index, i)
           }
         }
